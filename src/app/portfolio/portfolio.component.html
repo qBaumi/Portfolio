@@ -1,0 +1,267 @@
+<div class="portfolio-container">
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="hero-content">
+      <div class="hero-text">
+        <h1 class="hero-title">Hi, I'm Max 👋</h1>
+        <p class="hero-description">
+          Junior Software Developer. I'm a recent graduate and I'm looking to start my career in software development.
+        </p>
+      </div>
+      <div class="hero-image">
+        <img
+          src="assets/Posch_5.jpg"
+          alt="Profile Picture"
+          class="profile-img"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="about-section">
+    <h2 class="section-title">About</h2>
+    <p class="about-text">
+      This January, I completed my military service as a <span class="highlight">Sniper</span> in the Austrian Army. Prior to that, I graduated from the <span class="highlight">HTL Leoben, with a focus on information technology and smart production</span>.
+      In previous projects, I developed a web application for internal cost tracking on construction sites using Angular, created Discord bots for automation tasks used by <span class="highlight">over 300 users</span>, built Twitch bots to enhance stream interaction, and implemented various API integrations into these projects.
+    </p>
+  </section>
+
+  <!-- Work Experience Section -->
+  <section class="work-section">
+  <h2 class="section-title">Work Experience</h2>
+
+  <div
+    *ngFor="let job of workExperience; let i = index"
+    class="experience-row group"
+    (click)="toggleWorkExperience(i)"
+  >
+    <div class="experience-header">
+      <div class="experience-left">
+        <img [src]="job.logo" class="experience-logo" />
+        <div>
+          <h3 class="experience-company">
+            {{ job.company }}
+
+            <svg
+              class="chevron"
+              [class.open]="job.expanded"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="m9 18 6-6-6-6" />
+            </svg>
+          </h3>
+
+          <div class="experience-role">{{ job.role }}</div>
+        </div>
+      </div>
+
+      <div class="experience-period">{{ job.period }}</div>
+    </div>
+
+    <ul
+      class="experience-details"
+      [class.open]="job.expanded"
+    >
+      <li *ngFor="let item of job.description">
+        {{ item }}
+      </li>
+    </ul>
+  </div>
+</section>
+
+
+  <!-- Education Section -->
+<section class="education-section">
+  <h2 class="section-title">Education</h2>
+
+  <div
+    *ngFor="let edu of education; let i = index"
+    class="experience-row group"
+    (click)="toggleEducation(i)"
+  >
+    <div class="experience-header">
+      <div class="experience-left">
+        <img [src]="edu.logo" class="experience-logo" />
+
+        <div>
+          <h3 class="experience-company">
+            {{ edu.institution }}
+
+            <svg
+              class="chevron"
+              [class.open]="edu.expanded"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+            >
+              <path d="m9 18 6-6-6-6" />
+            </svg>
+          </h3>
+
+          <div class="experience-role">
+            {{ edu.degree }}
+          </div>
+        </div>
+      </div>
+
+      <div class="experience-period">
+        {{ edu.period }}
+      </div>
+    </div>
+
+    <ul
+      class="experience-details"
+      [class.open]="edu.expanded"
+    >
+      <li *ngFor="let item of edu.description">
+        {{ item }}
+      </li>
+    </ul>
+  </div>
+</section>
+
+
+  <!-- Projects Section -->
+  <section class="projects-section">
+    <h2 class="section-title">My Projects</h2>
+    <div class="projects-grid">
+      <div
+        *ngFor="let project of projects"
+        class="project-card"
+      >
+        <div class="project-image">
+          <img
+            [src]="project.image"
+            [alt]="project.title"
+          />
+        </div>
+        <div class="project-content">
+          <h3 class="project-title">{{ project.title }}</h3>
+          <p class="project-description">{{ project.description }}</p>
+          <div class="project-tags">
+            <span
+              *ngFor="let tag of project.tags"
+              class="project-tag"
+            >
+              {{ tag }}
+            </span>
+          </div>
+          <div class="project-links">
+            <a
+              *ngIf="project.github"
+              [href]="project.github"
+              class="project-link"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i class="icon-github"></i>
+              GitHub
+            </a>
+            <a
+              *ngIf="project.demo"
+              [href]="project.demo"
+              class="project-link demo"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i class="icon-play"></i>
+              Demo
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section class="skills-section">
+    <h2 class="section-title center">My Skills</h2>
+
+    <!-- Tabs -->
+    <div class="skills-tabs">
+      <button
+        *ngFor="let tab of skillTabs"
+        [class.active]="activeTab === tab"
+        (click)="setActiveTab(tab)"
+        class="skill-tab"
+      >
+        {{ tab }}
+      </button>
+    </div>
+
+    <!-- Skills Grid -->
+    <div class="skills-grid">
+      <div
+        *ngFor="let skill of activeSkills"
+        class="skill-card"
+      >
+        <div [class]="'skill-icon ' + skill.color">
+          {{ skill.icon }}
+        </div>
+        <span class="skill-name">{{ skill.name }}</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact-section">
+    <h2 class="section-title center">Get in Touch</h2>
+    <p class="contact-description">
+      Please contact me directly at
+      <a href="mailto:benrogers1299@outlook.com" class="email-link">
+        benrogers1299@outlook.com
+      </a>
+      or through this form.
+    </p>
+
+    <form (ngSubmit)="onSubmit()" class="contact-form">
+      <input
+        type="email"
+        [(ngModel)]="contactForm.email"
+        name="email"
+        placeholder="Your email"
+        class="form-input"
+        required
+      />
+      <textarea
+        [(ngModel)]="contactForm.message"
+        name="message"
+        placeholder="Your message"
+        rows="5"
+        class="form-textarea"
+        required
+      ></textarea>
+      <button type="submit" class="form-button">
+        Send Message
+      </button>
+    </form>
+  </section>
+
+  <!-- Footer Social Links -->
+  <footer class="footer">
+    <div class="footer-nav">
+      <a
+        *ngFor="let link of socialLinks"
+        [href]="link.url"
+        class="nav-link"
+        [attr.aria-label]="link.label"
+      >
+        <i class="icon-{{ link.icon }}"></i>
+      </a>
+      <button
+        class="nav-link theme-toggle"
+        (click)="toggleTheme()"
+        aria-label="Toggle theme"
+      >
+        <i [class]="isDarkMode ? 'icon-moon' : 'icon-sun'"></i>
+      </button>
+    </div>
+  </footer>
+</div>
