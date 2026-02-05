@@ -226,6 +226,7 @@ body.light-mode {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif;
   font-size: 16px;
   line-height: 1.5;
+  padding-top: 3rem;
 }
 
 // Hero Section
@@ -291,6 +292,9 @@ body.light-mode {
   border: 3px solid $border-default;
   object-fit: cover;
   transition: transform 0.3s ease;
+  image-rendering: auto;
+  backface-visibility: hidden;
+  transform: translateZ(0);
 
   &:hover {
     transform: scale(1.05);
@@ -780,11 +784,14 @@ section {
 .group:hover .chevron.open {
   transform: rotate(90deg);
 }
-/* Expand animation */
 .experience-details {
-  margin-left: 4rem;
+  list-style-type: disc;
+  list-style-position: outside;
+
+  padding-left: 1.25rem;   /* space for bullet */
+  margin-left: 3rem;          /* don’t push the whole list */
+
   margin-top: 0.5rem;
-  list-style: disc;
   overflow: hidden;
 
   max-height: 0;
@@ -795,7 +802,7 @@ section {
 }
 
 .experience-details.open {
-  max-height: 1000px; // large enough for content
+  max-height: 1000px;
   opacity: 1;
 }
 
@@ -803,6 +810,8 @@ section {
   font-size: 0.8rem;
   margin-bottom: 0.25rem;
 }
+
+
 
 // Skills Section
 .skills-section {
@@ -817,7 +826,6 @@ section {
   gap: 0.5rem;
   margin-bottom: 1.5rem;
 }
-
 .skill-tab {
   padding: 0.5rem 1rem;
   border-radius: 6px;
@@ -843,15 +851,17 @@ section {
 
 .skills-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  max-width: 90%;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); // narrower cards
   gap: 0.75rem;
+  justify-content: center;
 
   @media (min-width: 640px) {
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(110px, 1fr));
   }
 
   @media (min-width: 768px) {
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr); // exactly 5 cards in a row on medium+ screens
   }
 }
 
@@ -859,14 +869,15 @@ section {
   background-color: $bg-secondary;
   border: 1px solid $border-default;
   border-radius: 6px;
-  padding: 1.25rem;
+  padding: 1rem 0.5rem;   // slightly smaller padding
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 0.625rem;
+  gap: 0.5rem;
   transition: all 0.2s ease;
   cursor: pointer;
+  min-height: 140px;          // maintain taller look
 
   &:hover {
     background-color: $bg-tertiary;
@@ -876,8 +887,8 @@ section {
 }
 
 .skill-icon {
-  width: 3rem;
-  height: 3rem;
+  width: 2rem;
+  height: 2.5rem;            // slightly smaller icon
   border-radius: 6px;
   display: flex;
   align-items: center;
@@ -887,10 +898,11 @@ section {
 }
 
 .skill-name {
-  font-size: 0.875rem;
+  font-size: 0.825rem;        // slightly smaller text
   font-weight: 500;
   text-align: center;
   color: $text-primary;
+  margin-bottom: 0.5rem;
 }
 
 // Contact Section

@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
 
 interface Skill {
   name: string;
   icon: string;
-  color: string;
 }
 
 interface WorkExperience {
@@ -42,7 +42,27 @@ interface Project {
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './portfolio.component.html',
-  styleUrls: ['./portfolio.component.scss']
+  styleUrls: ['./portfolio.component.scss'],
+  animations: [
+    trigger('listAnimation', [
+      transition('* => *', [
+        query(
+          ':enter',
+          [
+            style({ opacity: 0, transform: 'translateY(10px)' }),
+            stagger(50, [
+              animate(
+                '200ms ease-out',
+                style({ opacity: 1, transform: 'translateY(0)' })
+              )
+            ])
+          ],
+          { optional: true }
+        )
+      ])
+    ])
+  ]
+
 })
 export class PortfolioComponent {
 
@@ -55,94 +75,92 @@ export class PortfolioComponent {
   };
 
   skills: Record<string, Skill[]> = {
-    Backend: [
-      { name: 'Node.js', icon: '🟢', color: 'bg-green-500' },
-      { name: 'TypeScript', icon: 'TS', color: 'bg-blue-500' },
-      { name: '.NET', icon: '.NET', color: 'bg-purple-500' },
-      { name: 'C#', icon: 'C#', color: 'bg-purple-400' },
-      { name: 'Laravel', icon: 'L', color: 'bg-red-500' },
-      { name: 'PHP', icon: 'php', color: 'bg-indigo-400' },
-      { name: 'Python', icon: '🐍', color: 'bg-yellow-500' },
-      { name: 'SQL', icon: 'SQL', color: 'bg-gray-500' },
-      { name: 'PostgreSQL', icon: '🐘', color: 'bg-blue-600' },
-      { name: 'MySQL', icon: 'My', color: 'bg-blue-400' },
-      { name: 'DynamoDB', icon: 'DB', color: 'bg-blue-700' },
-      { name: 'REST APIs', icon: 'API', color: 'bg-green-600' },
-      { name: 'GraphQL', icon: 'GQL', color: 'bg-pink-500' },
-    ],
     Frontend: [
-      { name: 'React', icon: '⚛️', color: 'bg-cyan-500' },
-      { name: 'Angular', icon: 'A', color: 'bg-red-600' },
-      { name: 'Vue.js', icon: 'V', color: 'bg-green-500' },
-      { name: 'HTML5', icon: 'H5', color: 'bg-orange-500' },
-      { name: 'CSS3', icon: 'C3', color: 'bg-blue-500' },
-      { name: 'Tailwind', icon: 'TW', color: 'bg-cyan-400' },
+      { name: 'Angular', icon: 'angular.webp'},
+      { name: 'TypeScript', icon: 'ts.png'},
+      { name: 'HTML5', icon: 'html.png'},
+      { name: 'CSS3', icon: 'css.png'},
+      { name: 'Flutter', icon: 'flutter.png'},
+      { name: 'Single Page Applications', icon: 'spa.svg'},
+    ],
+    Backend: [
+      { name: 'Java', icon: 'java.webp'},
+      { name: 'Python', icon: 'python.png'},
+      { name: 'SQL', icon: 'sql.svg'},
+      { name: 'Node.js', icon: 'nodejs.webp'},
+      { name: 'MariaDB', icon: 'mariadb.png'},
+      { name: 'C#', icon: 'cs.avif'},
+      { name: 'C', icon: 'c.png'},
+      { name: 'Redis', icon: 'redis.png'},
+      { name: 'REST APIs', icon: 'rest.svg'},
+      { name: 'Web Scraping', icon: 'webscraping.webp'},
     ],
     DevOps: [
-      { name: 'Docker', icon: '🐳', color: 'bg-blue-500' },
-      { name: 'AWS', icon: 'AWS', color: 'bg-orange-500' },
-      { name: 'CI/CD', icon: '🔄', color: 'bg-green-500' },
-      { name: 'Git', icon: 'Git', color: 'bg-orange-600' },
-    ],
-    Practices: [
-      { name: 'Agile', icon: '🏃', color: 'bg-blue-500' },
-      { name: 'TDD', icon: '✓', color: 'bg-green-500' },
-      { name: 'Clean Code', icon: '✨', color: 'bg-purple-500' },
+      { name: 'Docker', icon: 'docker.png'},
+      { name: 'Git', icon: 'git.png'},
     ],
     Tools: [
-      { name: 'VS Code', icon: 'VS', color: 'bg-blue-600' },
-      { name: 'Postman', icon: 'PM', color: 'bg-orange-500' },
-      { name: 'Jira', icon: 'J', color: 'bg-blue-500' },
+      { name: 'Linux', icon: 'linux.png'},
+      { name: 'Unity', icon: 'unity.webp'},
+      { name: 'SAP', icon: 'sap.svg'},
+      { name: 'Forge', icon: 'forge.jpg'},
     ],
   };
 
 workExperience: WorkExperience[] = [
+
   {
-    company: 'Humanforce',
-    role: 'Software Engineer',
-    period: 'Jan 2024 - Present',
-    logo: '🏢',
-    color: 'bg-yellow-500',
-    expanded: false,
-    description: [
-  "Worked on web applications serving 600,000+ users with a modern tech stack including a Laravel backend (PHP) with GraphQL endpoints, a React SPA frontend (TypeScript), event-driven Node.js (TypeScript) microservices, and also AWS Lambda backends (TypeScript).",
-  "Enhanced the email log in intelliHR by integrating AWS SES and a microservice to track bounce, complaint, and delivery status, allowing users to retry failed messages.",
-  "Built user management features for a multi-tenant infrastructure management system, enabling administrators to create users, assign companies, and define permissions (TypeScript, Angular, Lambda, API Gateway, DynamoDB).",
-  "Developed backend APIs for the intelliHR-Thrive mobile app integration, streamlining in-app form completion and boosting task completion rates.",
-  "Automated pruning of large database tables to reduce data growth and lower long-term storage costs.",
-  "Setup Sumo Logic in Node.js and .NET lambdas to standardise logging format across codebases.",
-  "Improved job data download performance by implementing a streaming mechanism, making downloads significantly faster and more memory-efficient.",
-  "Implemented comprehensive testing across the stack using Playwright, PHPUnit, Jest and Cypress.",
-  "Migrated legacy REST endpoints to GraphQL.",
-  "Led smooth PHP and Laravel version upgrades.",
-  "Setup ESLint and Prettier in CI/CD pipelines to enforce coding standards and consistent code quality across teams."
-],
-  },
-  {
-    company: 'The University of Queensland',
-    role: 'Software Engineer',
-    period: 'Nov 2022 - Jan 2024',
-    logo: '🎓',
+    company: 'Das Land Steiermark - Abteilung 7',
+    role: 'Internship & Diploma Thesis',
+    period: 'Summer 2024',
+    logo: '../../assets/landsteiermark.png',
     color: 'bg-purple-600',
     expanded: false,
     description: [
-      'Developed and maintained web applications using .NET and React.',
-      'Worked with teams to deliver quality software solutions.'
-    ],
-  }
+  "Developed a digital construction cost tracking system for the Land Steiermark, replacing an inefficient Excel- and email-based workflow with a modern, scalable software solution.",
+  "Performed detailed process analysis and requirements engineering to translate real-world workflows into a user-friendly digital solution.",
+  "Led system architecture and technical design, ensuring seamless communication between web, mobile, and backend components.",
+  "Built the Angular-based admin tool used by office staff to review costs, manage construction projects, and validate submitted data.",
+  "Applied project management to coordinate development phases, prioritize features, and deliver a production-ready system.",
+  "Worked closely with future users to gather feedback, iterate on features, and align the solution with operational needs.",
+  "Participated in on-site supervision of fiber optic construction projects across Styria.",
+  "Improved data accuracy, efficiency, and transparency of construction cost recording through automation and centralized data management.",
+  "Transitioned the project into production following successful completion of the diploma thesis."
+]
+
+  },
+  {
+    company: 'Knapp AG',
+    role: 'Internship Software Engineering',
+    period: 'Summer 2022, 2023',
+    logo: '../../assets/knapp_ag_logo.jpg',
+    color: 'bg-yellow-500',
+    expanded: false,
+description: [
+  "Developed and maintained the web frontend of an internal company portal using Angular and TypeScript.",
+  "Tested and validated core functionalities to ensure user experience.",
+  "Provided improvement suggestions for fundamental development practices, enhancing maintainability.",
+  "Conducted extensive bug fixing, resolving critical issues and improving overall system stability.",
+  "Independently implemented new features such as user settings, improving personalization and usability.",
+],
+
+  },
 ];
 
 
 education: Education[] = [
   {
     institution: 'HTL Leoben',
-    degree: 'Matura - Information Technology and Smart Production',
-    period: 'Sep 2020 - June 2025',
-    logo: 'HTL',
+    degree: 'Information Technology and Smart Production',
+    period: 'Sep 2020 - Jun 2025',
+    logo: '../../assets/htl.png',
     color: 'bg-blue-600',
     expanded: false,
     description: [
-      'Austrian higher technical college focused on IT and smart production.'
+      'Austrian higher technical college',
+      'Focus on Information technology and smart production.',
+      "Matura completed with an overall average grade of 1.0",
+      'Participated in program attending a course on the technical university Graz',
     ]
   },
 ];

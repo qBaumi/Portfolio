@@ -197,15 +197,19 @@
     </div>
 
     <!-- Skills Grid -->
-    <div class="skills-grid">
+    <div class="skills-grid" [@listAnimation]="activeTab">
       <div
         *ngFor="let skill of activeSkills"
         class="skill-card"
       >
-        <div [class]="'skill-icon ' + skill.color">
-          {{ skill.icon }}
-        </div>
         <span class="skill-name">{{ skill.name }}</span>
+
+        <div>
+          <img
+          [src]="'../../assets/' + skill.icon"
+          [alt]="skill.name" style="max-width: 2.5rem;height: 2.5rem;object-fit: contain;display: block"
+        />
+        </div>
       </div>
     </div>
   </section>
