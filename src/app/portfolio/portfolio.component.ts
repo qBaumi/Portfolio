@@ -168,11 +168,11 @@ education: Education[] = [
 
   projects: Project[] = [
     {
-      title: 'Developer Job Portal',
-      description: 'Job portal for companies looking to hire developers in Australia. Filter by experience, location and keywords. Companies can pay a monthly fee to be able to message developers on the site and view their information. Built with Laravel.',
-      image: 'assets/projects/job-portal.png',
-      github: 'https://github.com/yourusername/job-portal',
-      tags: ['Laravel', 'PHP', 'MySQL', 'Tailwind']
+      title: 'Cost Recording Tool for Construction Sites',
+      description: 'A digital solution for cost recording on construction sites. A system consisting of anAngular web application, a Flutter mobile app, and a Node.js backend with a MariaDB database was implemented. The new software replaces the previous inefficient Excelbased process, enabling optimized and error-reduced cost recording. Key challenges included integrating various technologies and ensuring a scalable solution, which were successfully addressed using agile development methods.',
+      image: 'assets/baustelledetails.png',
+      demo: 'https://www.youtube.com/watch?v=PauTWeaU8Y0',
+      tags: ['Angular', 'Typescript', 'Single Page Application', 'MariaDB','Node.js']
     },
     {
       title: 'Project Management',

@@ -144,7 +144,7 @@
         </div>
         <div class="project-content">
           <h3 class="project-title">{{ project.title }}</h3>
-          <p class="project-description">{{ project.description }}</p>
+          <p class="project-description">  {{ project.description | slice:0:160 }}{{ project.description.length > 160 ? '...' : '' }}</p>
           <div class="project-tags">
             <span
               *ngFor="let tag of project.tags"
@@ -219,8 +219,8 @@
     <h2 class="section-title center">Get in Touch</h2>
     <p class="contact-description">
       Please contact me directly at
-      <a href="mailto:benrogers1299@outlook.com" class="email-link">
-        benrogers1299@outlook.com
+      <a href="mailto:max05posch@gmail.com" class="email-link">
+        max05posch@gmail.com
       </a>
       or through this form.
     </p>
