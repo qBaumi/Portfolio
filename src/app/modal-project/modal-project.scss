@@ -1,0 +1,254 @@
+$bg-primary: #0d1117;
+$border-default: #30363d;
+$bg-secondary: #161b22;
+$light-bg-primary: #ffffff;
+$light-bg-secondary: #f6f8fa;
+$light-bg-tertiary: #eaeef2;
+$light-border-default: #d0d7de;
+$light-border-muted: #d8dee4;
+$light-text-primary: #24292f;
+$light-text-secondary: #57606a;
+$light-text-link: #0969da;
+$light-text-link-hover: #0550ae;
+$light-accent-emphasis: #0969da;
+$light-accent-emphasis-hover: #0550ae;
+html, body {
+  background: $bg-secondary;
+  margin: 0;
+}
+.custom-dialog-container {
+  .mat-mdc-dialog-container {
+    --mdc-dialog-container-color: #161b22;
+    background: #161b22;
+    padding: 0; // This often fixes the white strip
+  }
+
+  .mat-mdc-dialog-surface {
+    background-color: #161b22;
+    padding: 0;
+  }
+}
+.cdk-overlay-pane {
+  background: #161b22 !important;
+
+  .mat-mdc-dialog-container {
+    background: #161b22 !important;
+    padding: 0 !important;
+
+    .mdc-dialog__surface {
+      background-color: #161b22 !important;
+      padding: 0 !important;
+    }
+  }
+}
+::ng-deep .mat-mdc-dialog-container {
+  --mdc-dialog-container-color: #161b22 !important;
+  background: #161b22 !important;
+  padding: 0 !important; // 🔥 Critical - removes Material's default padding
+  overflow: hidden; // 🔥 Prevents overflow issues
+}
+
+::ng-deep .mdc-dialog__surface {
+  background-color: #161b22 !important;
+  padding: 0 !important;
+}
+
+::ng-deep .mat-mdc-dialog-surface {
+  background-color: #161b22 !important;
+  padding: 0 !important;
+}
+.job-portal-modal {
+  background: $bg-secondary;
+  color: #e5e7eb;
+
+  // 🔥 REMOVE min-height: 100svh; - This is the culprit!
+  // The dialog container controls the height, not your modal content
+
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  border-radius: 0;
+
+  // 🔥 ADD THIS - ensures it fills the dialog container
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+  .modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 2rem;
+    border-bottom: 1px solid $border-default;
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    background: $bg-secondary;
+
+    h1 {
+      margin: 0;
+      font-size: 2rem;
+      font-weight: 600;
+      color: #ffffff;
+    }
+
+    .close-btn {
+      background: transparent;
+      border: none;
+      color: #9ca3af;
+      cursor: pointer;
+      padding: 0.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color 0.2s;
+
+      &:hover {
+        color: #ffffff;
+      }
+    }
+  }
+
+  /* ✅ centered project image */
+  .image-wrapper {
+    display: flex;
+    justify-content: center;
+    padding-bottom: 1rem;
+    padding-top: 2rem;
+    img {
+      max-width: 90%;
+      max-height: 600px;
+      object-fit: contain;
+    }
+  }
+
+  .project-info {
+    max-width: 1400px;
+    margin: 0;
+    padding: 0 2rem 2.5rem;
+    padding-top: 0%;
+    padding-bottom: 0%;
+    // 🔧 consistent vertical rhythm
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+
+    .description {
+      font-size: 1.1rem;
+      line-height: 1.65;
+      color: #d1d5db;
+      font-weight: 450;
+      padding-top: 1.5rem;
+    }
+
+    h2 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: #ffffff;
+    }
+
+    .features-section {
+      ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+
+        li {
+          padding-left: 1.5rem;
+          position: relative;
+          font-size: 0.9375rem;
+          color: #d1d5db;
+          line-height: 1.6;
+
+          &::before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            color: #3b82f6;
+            font-weight: bold;
+          }
+        }
+      }
+    }
+
+    .technologies-section {
+      .tech-badges {
+        display: flex;
+        gap: 0.75rem;
+        flex-wrap: wrap;
+
+        .tech-badge {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+          padding: 0.5rem 1rem;
+          background: #2d3748;
+          border: 1px solid #374151;
+
+          // 🔧 flatter modern look
+          border-radius: 0.25rem;
+
+          font-size: 0.875rem;
+          font-weight: 500;
+          color: #e5e7eb;
+          transition: border-color 0.2s;
+
+          &:hover {
+            border-color: #4b5563;
+          }
+
+          img {
+            width: 20px;
+            height: 20px;
+          }
+        }
+      }
+    }
+
+    .links-section {
+      .github-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.6rem 1.1rem;
+        background: #2d3748;
+        border: 1px solid #374151;
+
+        // 🔧 reduced rounding
+        border-radius: 0.25rem;
+
+        color: #e5e7eb;
+        text-decoration: none;
+        font-size: 0.875rem;
+        font-weight: 500;
+        transition: all 0.2s;
+
+        &:hover {
+          background: #374151;
+          border-color: #4b5563;
+        }
+
+        svg {
+          flex-shrink: 0;
+        }
+      }
+    }
+  }
+}
+  .project-link {
+    background-color: $light-bg-tertiary;
+    border-color: $light-border-default;
+    color: $light-text-primary;
+
+    &:hover {
+      background-color: $light-bg-primary;
+      border-color: $light-text-link;
+    }
+
+    &.demo {
+      background-color: $light-accent-emphasis;
+      border-color: $light-accent-emphasis;
+
+      &:hover {
+        background-color: $light-accent-emphasis-hover;
+        border-color: $light-accent-emphasis-hover;
+      }
+    }
+  }

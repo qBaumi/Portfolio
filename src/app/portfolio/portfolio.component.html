@@ -136,6 +136,7 @@
     <div
       *ngFor="let project of projects"
       class="project-row"
+  (click)="openProject(project)"
     >
       <div class="project-text">
         <h3 class="project-title">{{ project.title }}</h3>
@@ -217,7 +218,7 @@
 
         <div>
           <img
-          [src]="'../../assets/' + skill.icon"
+          [src]="'../../assets/skill-icons/' + skill.icon"
           [alt]="skill.name" style="max-width: 2.5rem;height: 2.5rem;object-fit: contain;display: block"
         />
         </div>

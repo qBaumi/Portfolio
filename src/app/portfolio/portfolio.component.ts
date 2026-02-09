@@ -2,45 +2,14 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { ModalProject } from '../modal-project/modal-project';
 
-interface Skill {
-  name: string;
-  icon: string;
-}
-
-interface WorkExperience {
-  expanded: boolean;
-description: string[];
-  company: string;
-  role: string;
-  period: string;
-  logo: string;
-  color: string;
-}
-
-interface Education {
-  expanded: boolean;
-  institution: string;
-  degree: string;
-  period: string;
-  logo: string;
-  color: string;
-  description: string[];
-}
-
-interface Project {
-  title: string;
-  description: string;
-  image: string;
-  github?: string;
-  demo?: string;
-  tags: string[];
-}
 
 @Component({
   selector: 'app-portfolio',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, MatDialogModule],
   templateUrl: './portfolio.component.html',
   styleUrls: ['./portfolio.component.scss'],
   animations: [
@@ -68,6 +37,18 @@ export class PortfolioComponent {
 
   activeTab: string = 'Backend';
   isDarkMode: boolean = true;
+  constructor(private dialog: MatDialog,) {}
+
+  openProject(project: Project) {
+    this.dialog.open(ModalProject, {
+      data: project,
+      panelClass: 'custom-dialog-container',
+      width: '60%',
+      maxWidth: '95vw',
+      maxHeight: '80vh',
+      height: '80%',
+    });
+}
 
   contactForm = {
     email: '',
@@ -169,41 +150,47 @@ education: Education[] = [
   projects: Project[] = [
     {
       title: 'Cost Recording Tool for Construction Sites',
-      description: 'A digital solution for cost recording on construction sites. A system consisting of an Angular web application, a Flutter mobile app, and a Node.js backend with a MariaDB database was implemented. The new software replaces the previous inefficient Excel-based process, enabling optimized and error-reduced cost recording. Key challenges included integrating various technologies and ensuring a scalable solution, which were successfully addressed using agile development methods.',
-      image: 'assets/baustelledetails.png',
+      description: 'A digital solution for cost recording on construction sites. The software replaces the previous inefficient Excel-based process, enabling optimized and error-reduced cost recording. Key challenges included integrating various technologies and ensuring a scalable solution..',
+      image: 'assets/projects/baustelledetails.png',
       demo: 'https://www.youtube.com/watch?v=PauTWeaU8Y0',
-      tags: ['Angular', 'Typescript', 'Single Page Application', 'MariaDB','Node.js']
+      features: [
+  'Secure User Authentication and Role-Based Access Control',
+  'Manage construction sites, positions, equipment/materials, entries, and notes',
+  'Ensure accurate and efficient cost recording through a user-friendly interface',
+  'Visualize cost data for better decision-making',
+  'Export data in Excel format',
+],
+      technologies: [{ name: 'Angular', icon: 'angular.webp' }, { name: 'Node.js', icon: 'nodejs.webp' }, { name: 'MariaDB', icon: 'mariadb.png' }, { name: 'TypeScript', icon: 'ts.png' }, { name: 'Single Page Application', icon: 'spa.svg' }],
     },
     {
-      title: 'Project Management',
-      description: 'Project management application featuring drag-and-drop kanban boards, user assignments, and team collaboration. Built with Laravel, React and Inertia.',
-      image: 'assets/projects/project-management.png',
-      github: 'https://github.com/yourusername/project-management',
-      tags: ['Laravel', 'React', 'Inertia', 'Tailwind']
+      title: 'Discord Bot',
+      description: 'A fully customized Discord Bot used by 300+ users built with Python and MariaDB, offering economy, moderation, prediction, and gaming features to engage and entertain server members',
+      image: 'assets/projects/discordbot.png',
+      github: 'https://github.com/qBaumi/Lemon-Bot',
+      features: [
+  'Moderation tools including a ticket system, logging, suggestion forms, and other utilities for server admins',
+  'Economy system with currency, items, gambling, pets, and interactive games like Wordle and Minesweeper',
+  'Prediction system for League of Legends games, tracking votes and awarding points throughout the Esports season',
+],
+      technologies: [{ name: 'Python', icon: 'python.png' }, { name: 'MariaDB', icon: 'mariadb.png' }, { name: 'SQL', icon: 'sql.svg' }],
     },
     {
-      title: 'Crypto Sentiment Analysis',
-      description: 'Cryptocurrency sentiment analysis website that analyses Twitter posts to determine sentiment for different cryptocurrencies. Built with React, Express.js, and AWS services including EC2, S3, and Elasticache with auto-scaling.',
-      image: 'assets/projects/crypto-sentiment.png',
-      github: 'https://github.com/yourusername/crypto-sentiment',
-      demo: 'https://demo.example.com',
-      tags: ['React', 'Express.js', 'AWS', 'Node.js']
+      title: 'Twitch Chatbot integrating Spotify, LastFM, and 7TV',
+      description: 'A Twitch Bot that displays live music, tracks game stats, monitors chat emotes and integrates Spotify and other APIs to enhance viewer engagement.',
+      image: 'assets/projects/twitchbot.png',
+      github: 'https://github.com/qBaumi/Lemonadebot',
+      features: [
+  'Show currently playing song in the stream background using the LastFM API',
+  'Display detailed statistics of recently played games, including rankings',
+  'Allow Twitch reward redemptions to add user-requested songs to a custom Spotify playlist for stream background music',
+  'Track 7TV emotes in Twitch chat to identify underused emotes and free up slots for new ones',
+  'Provide a dedicated Flask API to expose tracked data for integration with other projects'
+],
+      technologies: [{ name: 'Python', icon: 'python.png' }, { name: 'MariaDB', icon: 'mariadb.png' }, { name: 'SQL', icon: 'sql.svg' }],
     },
-    {
-      title: 'Company Asset Trading',
-      description: 'Java-based desktop application for trading virtual assets within a company network.',
-      image: 'assets/projects/asset-trading.png',
-      github: 'https://github.com/yourusername/asset-trading',
-      tags: ['Java', 'Desktop', 'Trading']
-    }
   ];
 
-  socialLinks = [
-    { icon: 'home', url: '#', label: 'Home' },
-    { icon: 'github', url: 'https://github.com/yourusername', label: 'GitHub' },
-    { icon: 'linkedin', url: 'https://linkedin.com/in/yourprofile', label: 'LinkedIn' },
-    { icon: 'mail', url: 'mailto:benrogers1299@outlook.com', label: 'Email' },
-  ];
+
 
   get skillTabs(): string[] {
     return Object.keys(this.skills);
@@ -218,26 +205,33 @@ education: Education[] = [
   }
 
   onSubmit(): void {
-    console.log('Form submitted:', this.contactForm);
-    // Hier kannst du die Form-Logik implementieren
-    alert('Nachricht gesendet!');
-    this.contactForm = { email: '', message: '' };
+    this.http.post('http://localhost:3000/send-email', this.contactForm)
+      .subscribe({
+        next: (res: any) => {
+          alert(res.message);
+          this.contactForm = { email: '', message: '' };
+        },
+        error: (err) => {
+          console.error(err);
+          alert('Failed to send message');
+        }
+      });
   }
-toggleWorkExperience(index: number): void {
-  // @ts-ignore
-  this.workExperience.at(index).expanded = !this.workExperience[index].expanded;
+  toggleWorkExperience(index: number): void {
+    // @ts-ignore
+    this.workExperience.at(index).expanded = !this.workExperience[index].expanded;
 
-}
+  }
 
-toggleEducation(index: number): void {
-  this.education.forEach((edu, i) => {
-    edu.expanded = i === index ? !edu.expanded : false;
-  });
-}
+  toggleEducation(index: number): void {
+    this.education.forEach((edu, i) => {
+      edu.expanded = i === index ? !edu.expanded : false;
+    });
+  }
 
-toggleTheme(): void {
-  this.isDarkMode = !this.isDarkMode;
-  document.body.classList.toggle('light-mode', !this.isDarkMode);
-}
+  toggleTheme(): void {
+    this.isDarkMode = !this.isDarkMode;
+    document.body.classList.toggle('light-mode', !this.isDarkMode);
+  }
 
 }
