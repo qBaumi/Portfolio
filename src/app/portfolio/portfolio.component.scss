@@ -194,25 +194,7 @@ body.light-mode {
     }
   }
 
-  .footer-nav {
-    background-color: $light-bg-secondary;
-    border-color: $light-border-default;
-  }
 
-  .nav-link {
-    color: $light-text-secondary;
-
-    &:hover {
-      background-color: $light-bg-tertiary;
-      color: $light-text-primary;
-    }
-
-    &.theme-toggle {
-      &:hover {
-        color: $light-text-link;
-      }
-    }
-  }
 }
 
 .portfolio-container {
@@ -1032,36 +1014,7 @@ section {
     min-width: 150px;
   }
 }
-.footer {
-  position: fixed;
-  bottom: 1.5rem;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 1000;
-}
 
-/* Dock container */
-.footer-nav {
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
-
-  padding: 0.5rem;
-  border-radius: 999px;
-
-  background: $bg-secondary;
-  border: 1px solid $border-default;
-  box-shadow: 0 10px 30px rgba(0,0,0,.35);
-
-  transition: padding 0.3s ease, gap 0.3s ease;
-}
-
-/* 👉 expanding effect */
-.footer-nav:hover {
-  padding-left: 1.5rem;
-  padding-right: 1.5rem;
-  gap: 0.6rem;
-}
 
 /* round icon buttons */
 .nav-link {
@@ -1111,7 +1064,14 @@ section {
     height: 2.4rem;
   }
 }
+.imprint{
+    color: $light-text-secondary;
 
+    &:hover {
+      color: $light-text-primary;
+    }
+
+}
 
 // Color Utilities (adjusted for GitHub theme)
 .bg-green-500 { background-color: #238636; }

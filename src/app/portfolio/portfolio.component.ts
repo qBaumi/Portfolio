@@ -4,11 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { ModalProject } from '../modal-project/modal-project';
+import { RouterLink } from "@angular/router";
 
 @Component({
   selector: 'app-portfolio',
   standalone: true,
-  imports: [CommonModule, FormsModule, MatDialogModule],
+  imports: [CommonModule, FormsModule, MatDialogModule, RouterLink],
   templateUrl: './portfolio.component.html',
   styleUrls: ['./portfolio.component.scss'],
   animations: [
